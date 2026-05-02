@@ -130,10 +130,17 @@
     }
 
     // 💖 YES CLICK CELEBRATION
-    yesBtn.addEventListener("click", () => {
-      document.body.innerHTML = "<h1>YAYYYY ❤️🥰💖</h1>";
-      for (let i = 0; i < 30; i++) createHeart();
-    });
+   yesBtn.addEventListener("click", () => {
+  document.body.innerHTML = `
+    <div class="celebration">
+      <h1>Knew you would say yes! 🎉</h1>
+      <img src="celebrate.png" class="celebrate-img">
+      <p>You just made me the happiest person! 💕</p>
+    </div>
+  `;
+
+  for (let i = 0; i < 40; i++) createHeart();
+});
 
     function createHeart() {
       const heart = document.createElement("div");
