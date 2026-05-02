@@ -6,6 +6,46 @@
   <title>Be My Valentine ❤️</title>
 
   <style>
+    .celebration {
+  text-align: center;
+  animation: fadeIn 1s ease;
+}
+
+.celebration h1 {
+  color: #ff4d94;
+  font-size: 2.2em;
+  animation: pop 0.8s ease;
+}
+
+.celebrate-img {
+  width: 250px;
+  margin: 20px 0;
+  animation: bounce 1.5s infinite;
+}
+
+.celebration p {
+  font-size: 1.3em;
+  color: #ff4d94;
+  animation: fadeIn 2s ease;
+}
+
+/* Animations */
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes pop {
+  0% { transform: scale(0.5); }
+  80% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+@keyframes bounce {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
     body {
       text-align: center;
       font-family: Arial, sans-serif;
