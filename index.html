@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Be My Valentine ❤️</title>
+
+  <style>
+    body {
+      text-align: center;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom, #ffe6e6, #ffcccc);
+      margin: 0;
+      padding: 20px;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 2em;
+      animation: float 2s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    button {
+      font-size: 1.4em;
+      padding: 16px 28px;
+      margin: 15px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      touch-action: manipulation;
+      transition: all 0.2s ease;
+    }
+
+    #yesBtn {
+      background-color: #ff4d4d;
+      color: white;
+    }
+
+    #noBtn {
+      background-color: #999;
+      color: white;
+      position: absolute;
+    }
+
+    .heart {
+      position: fixed;
+      bottom: -10px;
+      animation: rise 5s linear infinite;
+    }
+
+    @keyframes rise {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(-100vh); opacity: 0; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Will you be my Valentine? ❤️</h1>
+
+  <button id="yesBtn">Yes 💖</button>
+  <button id="noBtn">No</button>
+
+  <script>
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+
+    const texts = [
+      "No",
+      "No (are you sure?)",
+      "No (really sure??)",
+      "No (last chance 😭)",
+      "No (you’re breaking my heart 💔)"
+    ];
+
+    let index = 0;
+    let yesScale = 1;
+    let noClickedOnce = false;
+
+    const isDesktop = window.matchMedia("(hover: hover)").matches;
+
+    // 💻 DESKTOP (hover version)
+    if (isDesktop) {
+      noBtn.addEventListener("mouseover", () => {
+        index = (index + 1) % texts.length;
+        noBtn.textContent = texts[index];
+
+        moveButton();
+        growYes();
+      });
+    }
+
+    // 📱 MOBILE LOGIC
+    if (!isDesktop) {
+      noBtn.addEventListener("click", () => {
+
+        // FIRST CLICK → allow
+        if (!noClickedOnce) {
+          noClickedOnce = true;
+          noBtn.textContent = "No (are you sure?)";
+          return;
+        }
+
+        // AFTER → impossible to press 😈
+        index = (index + 1) % texts.length;
+        noBtn.textContent = texts[index];
+
+        moveButton();
+        growYes();
+      });
+    }
+
+    function moveButton() {
+      const x = Math.random() * (window.innerWidth - 120);
+      const y = Math.random() * (window.innerHeight - 60);
+
+      noBtn.style.left = `${x}px`;
+      noBtn.style.top = `${y}px`;
+    }
+
+    function growYes() {
+      yesScale += 0.15;
+      yesBtn.style.transform = `scale(${yesScale})`;
+    }
+
+    // 💖 YES CLICK CELEBRATION
+    yesBtn.addEventListener("click", () => {
+      document.body.innerHTML = "<h1>YAYYYY ❤️🥰💖</h1>";
+      for (let i = 0; i < 30; i++) createHeart();
+    });
+
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerHTML = "❤️";
+
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = (Math.random() * 15 + 8) + "px";
+
+      document.body.appendChild(heart);
+
+      setTimeout(() => heart.remove(), 5000);
+    }
+
+    setInterval(createHeart, 800);
+  </script>
+
+</body>
+</html>
